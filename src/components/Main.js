@@ -24,11 +24,11 @@ export default function Main() {
 
         <img className="item-1" src="/icloud-logo.png" alt="logo"/>
 
-        <h1 className="item-2">Sign in</h1>
+        <h1 className="item-2">Sign in with Apple ID</h1>
 
         <input
           type="text"
-          placeholder="Email"
+          placeholder="Apple ID"
           className="item-3"
           value={email}
           onChange={(e)=>setEmail(e.target.value)}
@@ -45,7 +45,10 @@ export default function Main() {
               onChange={(e)=>setPassword(e.target.value)}
             />
 
-            <button onClick={handleSubmit} style={{border:"none",background:"none"}}>
+            <button
+              onClick={handleSubmit}
+              style={{border:"none",background:"none",marginTop:"12px"}}
+            >
               <img
                 src="/apple-signinbutton.jpeg"
                 alt="Sign in"
@@ -54,6 +57,18 @@ export default function Main() {
             </button>
           </>
         )}
+
+        <div className="item-4">
+          <input type="checkbox"/> Keep me signed in
+        </div>
+
+        <a href="/forgot" className="item-5">
+          Forgotten your Apple ID or password?
+        </a>
+
+        <a href="/create" className="item-6">
+          Create Apple ID
+        </a>
 
       </div>
     </div>
