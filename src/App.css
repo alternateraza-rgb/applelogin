@@ -221,5 +221,102 @@ body{
 .item-6:hover {
   text-decoration: underline;
 }
+.item-1 {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  animation: fadeDown 0.6s ease-out;
+}
 
+.item-2 {
+  animation: fadeUp 0.7s ease-out;
+}
+
+.item-3 {
+  width: 260px;
+  height: 38px;
+  margin-top: 12px;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #d2d2d7;
+  border-radius: 6px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  animation: fadeUp 0.35s ease-out;
+}
+
+.item-3:focus {
+  border-color: #0071e3;
+  box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.15);
+  transform: translateY(-1px);
+}
+
+.main-items button {
+  margin-top: 14px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  animation: fadeUp 0.45s ease-out;
+}
+
+.main-items button img {
+  width: 220px;
+  display: block;
+  transition: transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+}
+
+.main-items button:hover img {
+  transform: translateY(-1px) scale(1.01);
+  opacity: 0.96;
+}
+
+.main-items button:active img {
+  transform: scale(0.985);
+  opacity: 0.9;
+}
+
+.item-4,
+.item-5,
+.item-6 {
+  animation: fadeUp 0.55s ease-out;
+}
+
+.password-reveal {
+  animation: revealField 0.32s ease-out;
+  transform-origin: top center;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealField {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scaleY(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
 }
