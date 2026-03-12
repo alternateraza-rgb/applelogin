@@ -14,8 +14,8 @@ export default function Main(){
                     <input type="checkbox" id="topping" name="topping" value="Paneer" /> Keep me signed in</div>
                 
     
-                <a className='item-5'>Forgotten your Apple ID or password?</a>
-                 <a className='item-6'>Create Apple ID</a>
+                <a href="/forgot" className='item-5'>Forgotten your Apple ID or password?</a>
+                <a href="/create" className='item-6'>Create Apple ID</a>
             </div>
         </div>
     )
