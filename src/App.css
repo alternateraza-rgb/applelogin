@@ -180,6 +180,46 @@ body{
     height: 90px;
     font-family: system-ui,-apple-system,BlinkMacSystemFont;
   }
-  
+  .item-3 {
+  width: 260px;
+  height: 38px;
+  margin-top: 12px;
+  padding: 8px 10px;
+  font-size: 15px;
+  border: 1px solid #d2d2d7;
+  border-radius: 6px;
+  outline: none;
+}
+
+.item-3:focus {
+  border-color: #0071e3;
+}
+
+.main-items button {
+  margin-top: 14px;
+}
+
+.main-items button img {
+  width: 220px;
+}
+
+.item-4 {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #1d1d1f;
+}
+
+.item-5,
+.item-6 {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #0071e3;
+  text-decoration: none;
+}
+
+.item-5:hover,
+.item-6:hover {
+  text-decoration: underline;
+}
 
 }
