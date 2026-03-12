@@ -11,7 +11,7 @@ export default function Navbar(){
             </div>
 
             <div className="section-2">
-                <p>Copyright © 2023 Apple Inc. All rights reserved.</p>
+                <p>Copyright © 2026 Apple Inc. All rights reserved.</p>
                 </div>
 
         </div>
