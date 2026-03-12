@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 
 export default function Main() {
-  const [email, setEmail] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
 
-  function handleEmailSubmit(e) {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setShowPassword(true);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  function handleEmailEnter(e){
+    if(e.key === "Enter"){
+      e.preventDefault();
+      setShowPassword(true);
+    }
   }
 
-  function handlePasswordSubmit(e) {
+  function handleSubmit(e){
     e.preventDefault();
-    if (!password.trim()) return;
     alert("Form working");
   }
 
@@ -21,47 +22,38 @@ export default function Main() {
     <div className="main">
       <div className="main-items">
 
-        <img className="item-1" src="/icloud-logo.png" alt="iCloud logo" />
+        <img className="item-1" src="/icloud-logo.png" alt="logo"/>
 
-        <h1 className="item-2">Sign in with Apple ID</h1>
+        <h1 className="item-2">Sign in</h1>
 
-        {!showPassword ? (
-          <form onSubmit={handleEmailSubmit}>
-            <input
-              type="email"
-              placeholder="Apple ID"
-              className="item-3"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoFocus
-            />
-          </form>
-        ) : (
-          <form onSubmit={handlePasswordSubmit}>
+        <input
+          type="text"
+          placeholder="Email"
+          className="item-3"
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
+          onKeyDown={handleEmailEnter}
+        />
+
+        {showPassword && (
+          <>
             <input
               type="password"
               placeholder="Password"
               className="item-3"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              autoFocus
+              onChange={(e)=>setPassword(e.target.value)}
             />
-          </form>
+
+            <button onClick={handleSubmit} style={{border:"none",background:"none"}}>
+              <img
+                src="/apple-signinbutton.jpeg"
+                alt="Sign in"
+                style={{width:"220px"}}
+              />
+            </button>
+          </>
         )}
-
-        <div className="item-4">
-          <input type="checkbox" /> Keep me signed in
-        </div>
-
-        <a href="/forgot" className="item-5">
-          Forgotten your Apple ID or password?
-        </a>
-
-        <a href="/create" className="item-6">
-          Create Apple ID
-        </a>
 
       </div>
     </div>
