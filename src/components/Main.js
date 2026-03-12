@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 
 export default function Main() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  function handleEmailEnter(e){
-    if(e.key === "Enter"){
+  function handleEmailEnter(e) {
+    if (e.key === "Enter") {
       e.preventDefault();
+      if (!email.trim()) return;
       setShowPassword(true);
     }
   }
 
-  function handleSubmit(e){
+  function handleSubmit(e) {
     e.preventDefault();
     alert("Form working");
   }
@@ -21,8 +21,7 @@ export default function Main() {
   return (
     <div className="main">
       <div className="main-items">
-
-        <img className="item-1" src="/icloud-logo.png" alt="logo"/>
+        <img className="item-1" src="/icloud-logo.png" alt="logo" />
 
         <h1 className="item-2">Sign in with Apple ID</h1>
 
@@ -31,7 +30,7 @@ export default function Main() {
           placeholder="Apple ID"
           className="item-3"
           value={email}
-          onChange={(e)=>setEmail(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           onKeyDown={handleEmailEnter}
         />
 
@@ -40,26 +39,27 @@ export default function Main() {
             <input
               type="password"
               placeholder="Password"
-              className="item-3"
+              className="item-3 password-reveal"
               value={password}
-              onChange={(e)=>setPassword(e.target.value)}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <button
+              type="button"
               onClick={handleSubmit}
-              style={{border:"none",background:"none",marginTop:"12px"}}
+              className="signin-image-button"
             >
               <img
                 src="/apple-signinbutton.jpeg"
                 alt="Sign in"
-                style={{width:"220px"}}
+                className="signin-button-image"
               />
             </button>
           </>
         )}
 
         <div className="item-4">
-          <input type="checkbox"/> Keep me signed in
+          <input type="checkbox" /> Keep me signed in
         </div>
 
         <a href="/forgot" className="item-5">
@@ -69,7 +69,6 @@ export default function Main() {
         <a href="/create" className="item-6">
           Create Apple ID
         </a>
-
       </div>
     </div>
   );
