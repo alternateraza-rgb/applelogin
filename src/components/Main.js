@@ -71,7 +71,7 @@ export default function Main({ onAppleSignIn }) {
         </div>
 
         <a href="/forgot" className="item-5">
-          Forgotten your Apple ID or password?
+          Forgot your Apple ID or password?
         </a>
 
         <a href="/create" className="item-6">
