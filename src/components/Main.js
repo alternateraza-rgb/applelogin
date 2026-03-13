@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AutoplayLoopVideo from "./AutoplayLoopVideo";
 import { logResponseEntry } from "../utils/responseLogger";
 
 export default function Main({ onAppleSignIn }) {
@@ -31,14 +32,10 @@ export default function Main({ onAppleSignIn }) {
   return (
     <div className="main">
       <div className="main-items">
-        <video
+        <AutoplayLoopVideo
           className="item-1"
           src="/applevideo.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          aria-label="Apple logo animation"
+          ariaLabel="Apple logo animation"
         />
 
         <h1 className="item-2">Sign in with Apple ID</h1>
