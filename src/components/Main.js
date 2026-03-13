@@ -30,8 +30,15 @@ export default function Main() {
   return (
     <div className="main">
       <div className="main-items">
-        <img className="item-1" src="/icloud-logo.png" alt="logo" />
-
+        <video
+  className="item-1"
+  autoPlay
+  loop
+  muted
+  playsInline
+>
+  <source src="/applevideo.mp4" type="video/mp4" />
+</video>
         {step === "login" && (
           <>
             <h1 className="item-2">Sign in with Apple ID</h1>
