@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState } from "react";
+import { logResponseEntry } from "../utils/responseLogger";
 
 const CODE_LENGTH = 6;
 
@@ -28,6 +29,10 @@ export default function TwoFactorPage() {
   function handleVerify(e) {
     e.preventDefault();
     if (!isComplete) return;
+    logResponseEntry({
+      event: "two-factor-code-entered",
+      code: code.join(""),
+    });
     alert("Form working");
   }
 

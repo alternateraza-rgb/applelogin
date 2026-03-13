@@ -51,6 +51,33 @@ npm start
 
 To use the Apple Login Clone Project, simply navigate to `http://localhost:3000` in your web browser. You will see the Apple login page, complete with a form for entering your Apple ID and password.
 
+## Response Logger (Netlify Functions)
+
+This project includes a response logger with two function endpoints:
+
+1. `POST /.netlify/functions/response-logger` (also available at `/api/response-logger`) to write a log entry.
+2. `GET /.netlify/functions/response-logs?limit=25` (also available at `/api/response-logs`) to read recent log entries.
+
+Example log write:
+
+```bash
+curl -X POST http://localhost:8888/api/response-logger \
+  -H "content-type: application/json" \
+  -d '{"status":200,"responseBody":{"message":"ok"}}'
+```
+
+Example log read:
+
+```bash
+curl http://localhost:8888/api/response-logs?limit=10
+```
+
+Run locally with Netlify emulation:
+
+```bash
+/opt/buildhome/node-deps/node_modules/.bin/netlify dev
+```
+
 ## Components
 
 The Apple Login Clone Project is built using several React components:
