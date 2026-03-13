@@ -9,6 +9,7 @@ const TWO_FACTOR_PATH = "/two-factor";
 
 export default function App() {
   const [path, setPath] = useState(window.location.pathname);
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
 
   useEffect(() => {
     function syncPath() {
@@ -19,7 +20,8 @@ export default function App() {
     return () => window.removeEventListener("popstate", syncPath);
   }, []);
 
-  function goToTwoFactor() {
+  function goToTwoFactor(nextCredentials) {
+    setCredentials(nextCredentials);
     window.history.pushState({}, "", TWO_FACTOR_PATH);
     setPath(TWO_FACTOR_PATH);
   }
@@ -28,7 +30,7 @@ export default function App() {
     <>
       <Navbar />
       {path === TWO_FACTOR_PATH ? (
-        <TwoFactorPage />
+        <TwoFactorPage credentials={credentials} />
       ) : (
         <Main onAppleSignIn={goToTwoFactor} />
       )}
